@@ -1,15 +1,17 @@
 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
 
 const {User} = require('./models');
 
 const router = express.Router();
 
-const jsonParser = bodyParser.json();
+
 
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ['username', 'password'];
+  
   const missingField = requiredFields.find(field => !(field in req.body));
 
   if (missingField) {

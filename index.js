@@ -22,8 +22,9 @@ mongoose.Promise = global.Promise;
 const passport = require('passport')
 const { dbConnect } = require('./db-mongoose');
 const { PORT, DATABASE_URL } = require('./config')
-//const { router: usersRouter } = require('../users')
-const statsRouter = require('./statsRouter')
+const { router: usersRouter } = require('./users')
+const { router: statsRouter } = require('./stats')
+//const statsRouter = require('./statsRouter')
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth')
 
 app.use(function (req, res, next) {
@@ -31,7 +32,7 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
     res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE')
     if (req.method === 'OPTIONS') {
-        return res.send(204)
+        return res.sendStatus(204)
     }
     next();
 })
@@ -41,8 +42,10 @@ passport.use(jwtStrategy)
 const jwtAuth = passport.authenticate('jwt', {session: false})
 
 
-//app.use('/stats', statsRouter)
-//app.use('/users', usersRouter)
+app.use('/stats', statsRouter)
+app.use('/users', usersRouter)
+app.use('/auth', authRouter)
+
 app.get('/', (req,res) => {
   res.json('thisisastring')
 })

@@ -46,10 +46,6 @@ app.use('/stats', statsRouter)
 app.use('/users', usersRouter)
 app.use('/auth', authRouter)
 
-app.get('/', (req,res) => {
-  res.json('thisisastring')
-})
-
 
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {

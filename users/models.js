@@ -14,12 +14,28 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    wins: {
+        type: Number
+        
+    },
+    losses: {
+        type: Number
+        
+    },
+    draws: {
+        type: Number
+        
+    }
+
 })
 
 UserSchema.methods.serialize = function() {
     return {
         username: this.username || '',
-        id: this._id
+        id: this._id,
+        wins: this.wins || 0,
+        losses: this.losses || 0,
+        draws: this.draws || 0
     }
 }
 

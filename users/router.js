@@ -2,6 +2,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
+const passport = require('passport')
+const jwtAuth = passport.authenticate('jwt', {session: false})
 
 const {User} = require('./models');
 
@@ -56,7 +58,7 @@ router.post('/', jsonParser, (req, res) => {
       min: 1
     },
     password: {
-      min: 10,
+      min: 8,
       max: 72
     }
   };
@@ -125,5 +127,20 @@ router.get('/', (req, res) => {
     .then(users => res.json(users.map(user => user.serialize())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
+
+
+router.put('/:id', jwtAuth, jsonParser, (req,res) => {
+    const updated = {}
+    const updateableFields = ['wins', 'losses', 'draws']
+    updateableFields.forEach(field => {
+        if (field in req.body) {
+            updated[field] = req.body[field]
+        }
+    })
+    Stats
+    .findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
+    .then(updatedStats => res.status(200).json(updatedStats))
+    .catch(err => res.status(500).json({message: "Update error"}))
+})
 
 module.exports = {router};

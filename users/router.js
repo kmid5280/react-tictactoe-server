@@ -137,7 +137,7 @@ router.put('/:id', jwtAuth, jsonParser, (req,res) => {
             updated[field] = req.body[field]
         }
     })
-    Stats
+    User
     .findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
     .then(updatedStats => res.status(200).json(updatedStats))
     .catch(err => res.status(500).json({message: "Update error"}))

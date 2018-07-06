@@ -74,7 +74,8 @@ router.post('/', jsonParser, (req, res) => {
   );
 
   if (tooSmallField || tooLargeField) {
-    return res.status(422).json({
+    
+      return res.status(422).json({
       code: 422,
       reason: 'ValidationError',
       message: tooSmallField
@@ -93,7 +94,6 @@ router.post('/', jsonParser, (req, res) => {
     .count()
     .then(count => {
       if (count > 0) {
-        
         return Promise.reject({
           code: 422,
           reason: 'ValidationError',

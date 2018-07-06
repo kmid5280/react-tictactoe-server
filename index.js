@@ -1,19 +1,9 @@
 'use strict';
-/*const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
 
-const { PORT, CLIENT_ORIGIN } = require('./config');
-const { dbConnect } = require('./db-mongoose');
-// const {dbConnect} = require('./db-knex');
-
-const app = express();*/
 require('dotenv').config();
 const express = require('express')
 const cors = require('cors')
 const {CLIENT_ORIGIN} = require('./config')
-
-//construct server code
 
 const morgan = require('morgan')
 const app = express();
@@ -24,7 +14,7 @@ const { dbConnect } = require('./db-mongoose');
 const { PORT, DATABASE_URL } = require('./config')
 const { router: usersRouter } = require('./users')
 const { router: statsRouter } = require('./stats')
-//const statsRouter = require('./statsRouter')
+
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth')
 
 app.use(function (req, res, next) {

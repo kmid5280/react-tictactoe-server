@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 const express = require('express')
 const router = express.Router();
 const YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search"
-const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || '';
+import YOUTUBE_API_KEY from '../config'
 
 router.get('/', (req, response) => {
     const url = YOUTUBE_API_URL + "?key=" + YOUTUBE_API_KEY + "&part=snippet"

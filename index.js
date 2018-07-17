@@ -16,7 +16,7 @@ const { router: usersRouter } = require('./users')
 const { router: statsRouter } = require('./stats')
 
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth')
-//const { router: countrySearchRouter } = require('./countrysearch')
+const { router: countrySearchRouter } = require('./countrysearch')
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -36,7 +36,7 @@ const jwtAuth = passport.authenticate('jwt', {session: false})
 app.use('/stats', statsRouter)
 app.use('/users', usersRouter)
 app.use('/auth', authRouter)
-//app.use('/countrysearch', countrySearchRouter)
+app.use('/countrysearch', countrySearchRouter)
 
 
 app.use(

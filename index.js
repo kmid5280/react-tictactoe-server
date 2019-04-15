@@ -14,6 +14,8 @@ const { dbConnect } = require('./db-mongoose');
 const { PORT, DATABASE_URL } = require('./config')
 const { router: usersRouter } = require('./users')
 const { router: statsRouter } = require('./stats')
+const { router: reactExerciseUsersRouter } = require('./react-exercise-users')
+const { router: reactExerciseWorkoutsRouter} = require('./react-exercise-workouts')
 
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth')
 const { router: countrySearchRouter } = require('./countrysearch')
@@ -37,6 +39,8 @@ app.use('/stats', statsRouter)
 app.use('/users', usersRouter)
 app.use('/auth', authRouter)
 app.use('/countrysearch', countrySearchRouter)
+app.use('/react-exercise-users', reactExerciseUsersRouter)
+app.use('/react-exercise-workouts', reactExerciseWorkoutsRouter)
 
 
 app.use(
